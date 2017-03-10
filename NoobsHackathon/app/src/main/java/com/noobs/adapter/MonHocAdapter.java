@@ -2,6 +2,7 @@ package com.noobs.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.noobs.model.MonHoc;
+import com.noobs.noobshackathon.ChonDapAnActivity;
+import com.noobs.noobshackathon.MainActivity;
 import com.noobs.noobshackathon.R;
 
 import java.util.ArrayList;
@@ -35,15 +38,37 @@ public class MonHocAdapter extends ArrayAdapter<MonHoc> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater=this.context.getLayoutInflater();
         View row=inflater.inflate(this.resource,null);
         TextView txtTenMonHoc= (TextView) row.findViewById(R.id.txtTenMonHoc);
         Button btnEditMonHoc= (Button) row.findViewById(R.id.btnEditMonHoc);
         Button btnDelMonHoc= (Button) row.findViewById(R.id.btnDelMonHoc);
-
+        btnEditMonHoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xulyEditMonHoc(position);
+            }
+        });
+        btnDelMonHoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xulyDelMonHoc(position);
+            }
+        });
         MonHoc tmp=this.objects.get(position);
         txtTenMonHoc.setText(tmp.getTenMonHoc());
         return row;
+    }
+
+    private void xulyDelMonHoc(int position) {
+        this.objects.remove(position);
+        this.notifyDataSetChanged();
+    }
+
+    private void xulyEditMonHoc(int position) {
+        Intent intent=new Intent(context,ChonDapAnActivity.class);
+        intent.putExtra("MONHOCSENT",objects.get(position));
+        context.startActivityForResult(intent,111);
     }
 }

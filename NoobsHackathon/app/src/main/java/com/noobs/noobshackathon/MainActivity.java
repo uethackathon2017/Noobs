@@ -1,10 +1,16 @@
 package com.noobs.noobshackathon;
 
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.noobs.adapter.MonHocAdapter;
 import com.noobs.model.DapAn;
@@ -31,10 +37,40 @@ public class MainActivity extends AppCompatActivity {
                 xuLyAddMonHoc();
             }
         });
+        lvDsMonHoc.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this,"Vào màn camera "+Integer.toString(position), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void xuLyAddMonHoc() {
-        
+        final AlertDialog dialog;
+        AlertDialog.Builder mBuilder=new AlertDialog.Builder(MainActivity.this);
+        View mView= getLayoutInflater().inflate(R.layout.dialog_nhapten,null);
+        TextView txtTitle= (TextView) mView.findViewById(R.id.txtTitle);
+        txtTitle.setText("Nhâp tên môn học!");
+        final TextView txtTenMonHoc= (TextView) mView.findViewById(R.id.txtContentDialog);
+        Button btnOk= (Button) mView.findViewById(R.id.btnXacNhan);
+        mBuilder.setView(mView);
+        dialog=mBuilder.create();
+        dialog.show();
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!txtTenMonHoc.getText().toString().isEmpty()) {
+                    Intent intent=new Intent(MainActivity.this,ChonDapAnActivity.class);
+                    intent.putExtra("MONHOCSENT",new MonHoc(txtTenMonHoc.getText().toString(),null));
+                    startActivityForResult(intent,111);
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(MainActivity.this,"Hãy nhập tên môn học", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
     }
 

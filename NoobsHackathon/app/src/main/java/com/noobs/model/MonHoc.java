@@ -1,14 +1,16 @@
 package com.noobs.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by SUNFLOWER on 3/10/2017.
  */
 
-public class MonHoc {
+public class MonHoc implements Serializable{
     private String tenMonHoc;
-    private ArrayList<DapAn> dapAnArrayList;
+    private ArrayList<DapAn> dsDapAn;
+
     public MonHoc() {
     }
 
@@ -21,19 +23,17 @@ public class MonHoc {
         this.tenMonHoc = tenMonHoc;
     }
 
-    public ArrayList<DapAn> getDapAnArrayList() {
-        return dapAnArrayList;
+    public ArrayList<DapAn> getDsDapAn() {
+        return dsDapAn;
     }
 
-    public void setDapAnArrayList(ArrayList<DapAn> dapAnArrayList) {
-        this.dapAnArrayList = dapAnArrayList;
+    public void setDsDapAn(ArrayList<DapAn> dsDapAn) {
+        this.dsDapAn = dsDapAn;
     }
 
-    public MonHoc(String tenMonHoc, ArrayList<DapAn> dapAnArrayList) {
+    public MonHoc(String tenMonHoc, ArrayList<DapAn> dsDapAn) {
 
         this.tenMonHoc = tenMonHoc;
-        this.dapAnArrayList = dapAnArrayList;
+        this.dsDapAn = dsDapAn;
     }
-
-
 }

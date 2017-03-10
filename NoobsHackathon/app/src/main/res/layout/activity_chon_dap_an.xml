@@ -6,22 +6,37 @@
     android:layout_height="match_parent"
     tools:context="com.noobs.noobshackathon.ChonDapAnActivity">
 
-    <ListView
-        android:id="@+id/lvDsDapAn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnLuuMonHoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Luu" />
+
+        <EditText
+            android:id="@+id/txtTenMonHoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <ListView
+            android:id="@+id/lvDsDapAn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAddDapAn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="+" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Luu" />
 </RelativeLayout>

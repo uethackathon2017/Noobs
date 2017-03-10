@@ -1,10 +1,12 @@
 package com.noobs.model;
 
+import java.io.Serializable;
+
 /**
  * Created by SUNFLOWER on 3/10/2017.
  */
 
-public class DapAn {
+public class DapAn implements Serializable{
     private int maDe;
     private String cauTraLoi;
 
