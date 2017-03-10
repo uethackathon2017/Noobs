@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.noobs.model.MonHoc;
@@ -38,9 +39,10 @@ public class MonHocAdapter extends ArrayAdapter<MonHoc> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater=this.context.getLayoutInflater();
         View row=inflater.inflate(this.resource,null);
+        TextView txtSttMonHoc= (TextView) row.findViewById(R.id.txtSttMonHoc);
         TextView txtTenMonHoc= (TextView) row.findViewById(R.id.txtTenMonHoc);
-        Button btnEditMonHoc= (Button) row.findViewById(R.id.btnEditMonHoc);
-        Button btnDelMonHoc= (Button) row.findViewById(R.id.btnDelMonHoc);
+        ImageButton btnEditMonHoc= (ImageButton) row.findViewById(R.id.btnEditMonHoc);
+        ImageButton btnDelMonHoc= (ImageButton) row.findViewById(R.id.btnDelMonHoc);
         btnEditMonHoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +57,7 @@ public class MonHocAdapter extends ArrayAdapter<MonHoc> {
         });
         MonHoc tmp=this.objects.get(position);
         txtTenMonHoc.setText(tmp.getTenMonHoc());
+        txtSttMonHoc.setText(Integer.toString(position+1));
         return row;
     }
 

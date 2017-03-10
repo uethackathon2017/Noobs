@@ -1,25 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants">
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingStart="0dp"
+    android:paddingTop="0dp">
 
-    <TextView
-        android:id="@+id/txtTenMonHoc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnEditMonHoc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
 
-    <Button
-        android:id="@+id/btnDelMonHoc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Del" />
-</LinearLayout>
+            <TextView
+                android:id="@+id/txtSttMonHoc"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="1."
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="14dp"
+                app:srcCompat="@drawable/imgdocument" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.20"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTenMonHoc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="TextView"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnEditMonHoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="14dp"
+                android:background="@android:color/transparent"
+                android:scaleX="1.15"
+                android:scaleY="1.15"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+
+            <ImageButton
+                android:id="@+id/btnDelMonHoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="14dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/btndel" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

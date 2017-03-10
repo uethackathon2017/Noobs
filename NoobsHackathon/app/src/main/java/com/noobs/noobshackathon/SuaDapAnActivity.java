@@ -36,6 +36,7 @@ public class SuaDapAnActivity extends AppCompatActivity {
         txtMaDe= (TextView) findViewById(R.id.txtMaDe);
         intent=getIntent();
         DapAn da= (DapAn) intent.getSerializableExtra("DAPANSENT");
+
         if(da.getMaDe()!=0) {
             txtMaDe.setText(Integer.toString(da.getMaDe()));
         }

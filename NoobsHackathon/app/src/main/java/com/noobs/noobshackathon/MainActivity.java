@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<MonHoc> dsMonHoc;
     MonHocAdapter monHocAdapter;
     ListView lvDsMonHoc;
-    Button btnAddMonHoc;
+    ImageButton btnAddMonHoc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addControl() {
         lvDsMonHoc= (ListView) findViewById(R.id.lvDsMonHoc);
-        btnAddMonHoc= (Button) findViewById(R.id.btnAddMonHoc);
+        btnAddMonHoc= (ImageButton) findViewById(R.id.btnAddMonHoc);
         dsMonHoc=new ArrayList<>();
         monHocAdapter=new MonHocAdapter(MainActivity.this,R.layout.item_monhoc,dsMonHoc);
         lvDsMonHoc.setAdapter(monHocAdapter);
@@ -86,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         MonHoc boDa2=new MonHoc("Hoa",dsDa);
         dsMonHoc.add(boDa);
         dsMonHoc.add(boDa1);
+        dsMonHoc.add(boDa2);
+        dsMonHoc.add(boDa2);
+        dsMonHoc.add(boDa2);
         dsMonHoc.add(boDa2);
         monHocAdapter.notifyDataSetChanged();
     }
