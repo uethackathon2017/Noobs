@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gialapdulieu() {
-        String arr1="Abcd";
+        String arr1="Abcdefgh";
         DapAn da1=new DapAn(123,arr1);
         DapAn da2=new DapAn(124,arr1);
         ArrayList<DapAn> dsDa=new ArrayList<>();

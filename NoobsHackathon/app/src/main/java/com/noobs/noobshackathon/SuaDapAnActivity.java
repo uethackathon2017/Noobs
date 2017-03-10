@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.noobs.adapter.CauTraLoiAdapter;
 import com.noobs.model.DapAn;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SuaDapAnActivity extends AppCompatActivity {
-    EditText txtMaDe;
+    TextView txtMaDe;
     ArrayList<Character> dsCauTraLoi;
     CauTraLoiAdapter cauTraLoiAdapter;
 
@@ -32,17 +33,21 @@ public class SuaDapAnActivity extends AppCompatActivity {
 
     }
     private void addControl() {
-        txtMaDe= (EditText) findViewById(R.id.txtMaDe);
+        txtMaDe= (TextView) findViewById(R.id.txtMaDe);
         intent=getIntent();
         DapAn da= (DapAn) intent.getSerializableExtra("DAPANSENT");
         if(da.getMaDe()!=0) {
             txtMaDe.setText(Integer.toString(da.getMaDe()));
         }
-      /*  lvCauTraLoi= (ListView) findViewById(R.id.lvCauTraLoi);
+        lvCauTraLoi= (ListView) findViewById(R.id.lvCauTraLoi);
         String tmp=da.getCauTraLoi();
-        for(int i=0;i<tmp.length();i++){
-
-            dsCauTraLoi.add(Character.valueOf(tmp[i]));
-        }*/
+        dsCauTraLoi=new ArrayList<>();
+        for (int i=0;i<tmp.length();i++){
+            dsCauTraLoi.add(Character.valueOf(tmp.charAt(i)));
+        }
+        if(dsCauTraLoi!=null){
+            cauTraLoiAdapter=new CauTraLoiAdapter(SuaDapAnActivity.this,R.layout.item_cautraloi,dsCauTraLoi);
+            lvCauTraLoi.setAdapter(cauTraLoiAdapter);
+        }
     }
 }
