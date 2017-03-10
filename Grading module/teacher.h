@@ -18,25 +18,27 @@ private:
 	Mat getAnswerSheet();
 	int minHessian;
 	Point tableSize; 
+	Ptr<SURF> detector;
+	vector<KeyPoint> keypoints_object;
+	Mat descriptor_object;
 public:
 	student result;
 
 	void setAnswerImage(Mat answerImage = Mat()){
 		if (!answerImage.data) return;
-		//resize(answerImage, this->answerImage, tableSize);
-		this->answerImage = answerImage;
+		cvtColor(answerImage, this->answerImage, CV_BGRA2GRAY);
 	}
 
 	void setKeyImage(Mat keyImage = Mat()){
 		if (!keyImage.data) return;
-		//resize(keyImage, this->keyImage, tableSize);
-		this->keyImage = keyImage;
+		cvtColor(keyImage, this->keyImage, CV_BGRA2GRAY);
 	}
 
 	void setSampleSheet(Mat sampleSheet = Mat()){
 		if (!sampleSheet.data) return;
-		//resize(sampleSheet, this->sampleSheet, tableSize);
-		this->sampleSheet = sampleSheet;
+		cvtColor(sampleSheet, this->sampleSheet, CV_BGRA2GRAY);
+		detector->detect(sampleSheet, keypoints_object);
+		detector->compute(sampleSheet, keypoints_object, descriptor_object);
 	}
 
 	void setMinHessian(int minHessian){
@@ -45,6 +47,8 @@ public:
 
 	teacher(Mat sampleSheet = Mat(), Mat answerImage = Mat(), Mat keyImage = Mat(), int minHessian = 500){
 		//todo: add code grayscale for everything & train input sample
+
+		detector = SURF::create(minHessian);
 		tableSize = Point(600, 600);
 		setAnswerImage(answerImage);
 		setKeyImage(keyImage);

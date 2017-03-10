@@ -12,20 +12,13 @@ void teacher::chamDiem(){
 }
 
 Mat teacher::getAnswerSheet(){
-	Ptr<SURF> detector = SURF::create(minHessian);
 
-	vector<KeyPoint> keypoints_object;
 	vector<KeyPoint> keypoints_scene;
+    Mat descriptor_scene;
 
-	detector->detect(sampleSheet, keypoints_object);
 	detector->detect(answerImage, keypoints_scene);
-
-	//extract descriptors
-	Mat descriptor_object;
-	Mat descriptor_scene;
-
-	detector->compute(sampleSheet, keypoints_object, descriptor_object);
 	detector->compute(answerImage, keypoints_scene, descriptor_scene);
+    cout << minHessian << endl;
 
 	//matching descriptor:
 	FlannBasedMatcher matcher;
@@ -74,7 +67,7 @@ Mat teacher::getAnswerSheet(){
 
     //-- Draw lines between the corners (the mapped object in the scene - image_2 )
     for (int i = 0; i < 4; i++)
-    	line(img_matches, scene_corners[i] + Point2f(sampleSheet.cols, 0), scene_corners[(i + 1) % 4] + Point2f(sampleSheet.cols, 0), Scalar(0, 255, 0), 4);
+    	line(img_matches, scene_corners[i] + Point2f(sampleSheet.cols, 0), scene_corners[(i + 1) % 4] + Point2f(sampleSheet.cols, 0), Scalar(0, 255, 0), 40);
 
     //-- Show detected matches
     resize(img_matches, img_matches, Size(800, 800));
@@ -83,7 +76,8 @@ Mat teacher::getAnswerSheet(){
     //-- Show result
     Mat h = findHomography(scene, obj, RANSAC);
     Mat answerSheet;
-    warpPerspective(answerImage, answerSheet, h, Size(sampleSheet.cols, sampleSheet.rows * 3.2));
+    warpPerspective(answerImage, answerSheet, h, Size(sampleSheet.cols, sampleSheet.rows * 2.5));
+    resize(answerSheet, answerSheet, answerSheet.size() / 3);
     imshow("Transform", answerSheet);
 
     waitKey(0);

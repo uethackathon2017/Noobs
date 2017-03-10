@@ -11,8 +11,8 @@ int main(int argc, char** argv){
 		return -1;
 	}
 
-	Mat img_object = imread(argv[1], IMREAD_GRAYSCALE);
-	Mat img_scene = imread(argv[2], IMREAD_GRAYSCALE);
+	Mat img_object = imread(argv[1]);
+	Mat img_scene = imread(argv[2]);
 
 	if (!img_object.data || !img_scene.data)
 	{
@@ -21,7 +21,7 @@ int main(int argc, char** argv){
 	}
 
 	teacher a; 
-	a.test();							//khong can thiet
+	a.test();			 				//khong can thiet
 	a.setMinHessian(atoi(argv[3]));		//500
 	a.setSampleSheet(img_object);		//phieu tra loi mau
 	a.setAnswerImage(img_scene);		//anh chup phieu tra loi cua hoc sinh
