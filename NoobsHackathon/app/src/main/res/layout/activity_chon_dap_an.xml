@@ -4,18 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.noobs.noobshackathon.MainActivity">
+    tools:context="com.noobs.noobshackathon.ChonDapAnActivity">
 
     <ListView
-        android:id="@+id/lvDsMonHoc"
+        android:id="@+id/lvDsDapAn"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <Button
-        android:id="@+id/btnAddMonHoc"
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="+" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Luu" />
 </RelativeLayout>
