@@ -9,7 +9,7 @@ using namespace cv::xfeatures2d;
 
 #ifndef TEACHER_H
 #define TEACHER_H
-
+ 
 class teacher{
 private:
 	Mat sampleSheet;
@@ -23,17 +23,20 @@ public:
 
 	void setAnswerImage(Mat answerImage = Mat()){
 		if (!answerImage.data) return;
-		resize(answerImage, this->answerImage, tableSize);
+		//resize(answerImage, this->answerImage, tableSize);
+		this->answerImage = answerImage;
 	}
 
 	void setKeyImage(Mat keyImage = Mat()){
 		if (!keyImage.data) return;
-		resize(keyImage, this->keyImage, tableSize);
+		//resize(keyImage, this->keyImage, tableSize);
+		this->keyImage = keyImage;
 	}
 
 	void setSampleSheet(Mat sampleSheet = Mat()){
 		if (!sampleSheet.data) return;
-		resize(sampleSheet, this->sampleSheet, tableSize);
+		//resize(sampleSheet, this->sampleSheet, tableSize);
+		this->sampleSheet = sampleSheet;
 	}
 
 	void setMinHessian(int minHessian){

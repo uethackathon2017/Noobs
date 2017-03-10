@@ -29,32 +29,45 @@ Mat teacher::getAnswerSheet(){
 
 	//matching descriptor:
 	FlannBasedMatcher matcher;
-    vector<DMatch> matches;
-    matcher.match(descriptor_object, descriptor_scene, matches);
+    vector< vector<DMatch> > matches;
 
-    double max_dist = 0; double min_dist = 100;
+    vector< DMatch > good_matches;
+
+    matcher.knnMatch(descriptor_object, descriptor_scene, matches, 2);
+    const float minRatio = 1.f / 1.5f;
+
+    for (int i = 0; i < matches.size(); i++){
+        const DMatch& bestMatch = matches[i][0];
+        const DMatch& betterMatch = matches[i][1];
+
+        float distanceRatio = bestMatch.distance / betterMatch.distance;
+        if (distanceRatio < minRatio) 
+            good_matches.push_back(bestMatch);
+    }
+
+    // double max_dist = 0; double min_dist = 100;
     
-    //-- Quick calculation of max and min distances between keypoints
-    for (int i = 0; i < descriptor_object.rows; i++)
-    {
-        double dist = matches[i].distance;
-        if (dist < min_dist) min_dist = dist;
-        if (dist > max_dist) max_dist = dist;
-    }
+    // //-- Quick calculation of max and min distances between keypoints
+    // for (int i = 0; i < descriptor_object.rows; i++)
+    // {
+    //     double dist = matches[i].distance;
+    //     if (dist < min_dist) min_dist = dist;
+    //     if (dist > max_dist) max_dist = dist;
+    // }
 
-    printf("-- Max dist : %f \n", max_dist);
-    printf("-- Min dist : %f \n", min_dist);
+    // printf("-- Max dist : %f \n", max_dist);
+    // printf("-- Min dist : %f \n", min_dist);
 
-    //-- Draw only "good" matches (i.e. whose distance is less than 3*min_dist )
-    std::vector< DMatch > good_matches;
+    // //-- Draw only "good" matches (i.e. whose distance is less than 3*min_dist )
+    // std::vector< DMatch > good_matches;
 
-    for (int i = 0; i < descriptor_object.rows; i++)
-    {
-        if (matches[i].distance <= 3 * min_dist)
-        {
-            good_matches.push_back(matches[i]);
-        }
-    }
+    // for (int i = 0; i < descriptor_object.rows; i++)
+    // {
+    //     if (matches[i].distance <= 3 * min_dist)
+    //     {
+    //         good_matches.push_back(matches[i]);
+    //     }
+    // } 
 
     Mat img_matches;
     drawMatches(sampleSheet, keypoints_object, answerImage, keypoints_scene,
@@ -97,6 +110,6 @@ Mat teacher::getAnswerSheet(){
     warpPerspective(answerImage, answerSheet, h, tableSize);
     imshow("Transform", answerSheet);
 
-    // waitKey(0);
+    waitKey(0);
     return answerSheet;
 }
