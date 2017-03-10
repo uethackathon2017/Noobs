@@ -12,6 +12,11 @@ int main(int argc, char** argv){
 	// }
 
 	Mat img_object = imread(argv[1], IMREAD_GRAYSCALE);
+
+	teacher a;	
+	a.setMinHessian(atoi(argv[2]));		//500
+	a.setSampleSheet(img_object);		//phieu tra loi mau
+
 	// Mat img_scene = imread(argv[2], IMREAD_GRAYSCALE);
 
 	// if (!img_object.data || !img_scene.data)
@@ -31,11 +36,7 @@ int main(int argc, char** argv){
 		cap >> frame;
 		if (frame.data)
 			imshow("frame", frame);
-			teacher a;
-			a.test();							//khong can thiet
-			a.setMinHessian(atoi(argv[2]));		//500
-			a.setSampleSheet(img_object);		//phieu tra loi mau
-			a.setAnswerImage(frame);		//anh chup phieu tra loi cua hoc sinh
+			a.setAnswerImage(frame);			//anh chup phieu tra loi cua hoc sinh
 			a.chamDiem();						//bat dau cham diem
 		if (waitKey(1) == 27) break;
 	}
