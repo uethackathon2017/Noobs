@@ -29,8 +29,7 @@ Mat teacher::getAnswerSheet(){
 
 	//matching descriptor:
 	FlannBasedMatcher matcher;
-    vector< vector<DMatch> > matches;
-
+    vector<vector<DMatch> > matches;
     vector< DMatch > good_matches;
 
     matcher.knnMatch(descriptor_object, descriptor_scene, matches, 2);
@@ -44,31 +43,7 @@ Mat teacher::getAnswerSheet(){
         if (distanceRatio < minRatio) 
             good_matches.push_back(bestMatch);
     }
-
-    // double max_dist = 0; double min_dist = 100;
     
-    // //-- Quick calculation of max and min distances between keypoints
-    // for (int i = 0; i < descriptor_object.rows; i++)
-    // {
-    //     double dist = matches[i].distance;
-    //     if (dist < min_dist) min_dist = dist;
-    //     if (dist > max_dist) max_dist = dist;
-    // }
-
-    // printf("-- Max dist : %f \n", max_dist);
-    // printf("-- Min dist : %f \n", min_dist);
-
-    // //-- Draw only "good" matches (i.e. whose distance is less than 3*min_dist )
-    // std::vector< DMatch > good_matches;
-
-    // for (int i = 0; i < descriptor_object.rows; i++)
-    // {
-    //     if (matches[i].distance <= 3 * min_dist)
-    //     {
-    //         good_matches.push_back(matches[i]);
-    //     }
-    // } 
-
     Mat img_matches;
     drawMatches(sampleSheet, keypoints_object, answerImage, keypoints_scene,
         good_matches, img_matches, Scalar::all(-1), Scalar::all(-1),
@@ -102,12 +77,13 @@ Mat teacher::getAnswerSheet(){
     	line(img_matches, scene_corners[i] + Point2f(sampleSheet.cols, 0), scene_corners[(i + 1) % 4] + Point2f(sampleSheet.cols, 0), Scalar(0, 255, 0), 4);
 
     //-- Show detected matches
+    resize(img_matches, img_matches, Size(800, 800));
     imshow("Good Matches & Object detection", img_matches);
 
     //-- Show result
     Mat h = findHomography(scene, obj, RANSAC);
     Mat answerSheet;
-    warpPerspective(answerImage, answerSheet, h, tableSize);
+    warpPerspective(answerImage, answerSheet, h, Size(sampleSheet.cols, sampleSheet.rows * 3.2));
     imshow("Transform", answerSheet);
 
     waitKey(0);

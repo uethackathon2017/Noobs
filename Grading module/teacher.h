@@ -17,7 +17,7 @@ private:
 	Mat keyImage;
 	Mat getAnswerSheet();
 	int minHessian;
-	Point tableSize; //this teacher's table size is limited =))
+	Point tableSize; 
 public:
 	student result;
 

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -7,9 +8,9 @@ using namespace std;
 
 class student{
 public:
-	char* ID;
+	string ID;
 	int mark;
-	student(char* ID = "NO ID", int mark = 0){
+	student(string ID = "NO ID", int mark = 0){
 		this->ID = ID;
 		this->mark = mark;
 	}

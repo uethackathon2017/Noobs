@@ -17,6 +17,8 @@ opencv2/opencv.hpp
 /home/dung/work/Noobs/Grading module/student.h
 iostream
 -
+string
+-
 
 /home/dung/work/Noobs/Grading module/teacher.cpp
 teacher.h
