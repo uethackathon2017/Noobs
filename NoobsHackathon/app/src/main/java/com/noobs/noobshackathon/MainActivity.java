@@ -1,15 +1,12 @@
 package com.noobs.noobshackathon;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.noobs.adapter.MonHocAdapter;
@@ -46,7 +43,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void xuLyAddMonHoc() {
-        final AlertDialog dialog;
+        Intent intent=new Intent(MainActivity.this,SuaMonHocActivity.class);
+        intent.putExtra("MONHOCSENT",new MonHoc());
+        startActivityForResult(intent,111);
+       /* final AlertDialog dialog;
         AlertDialog.Builder mBuilder=new AlertDialog.Builder(MainActivity.this);
         View mView= getLayoutInflater().inflate(R.layout.dialog_nhapten,null);
         TextView txtTitle= (TextView) mView.findViewById(R.id.txtTitle);
@@ -60,16 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!txtTenMonHoc.getText().toString().isEmpty()) {
-                    Intent intent=new Intent(MainActivity.this,ChonDapAnActivity.class);
-                    intent.putExtra("MONHOCSENT",new MonHoc(txtTenMonHoc.getText().toString(),null));
-                    startActivityForResult(intent,111);
-                    dialog.dismiss();
-                } else {
-                    Toast.makeText(MainActivity.this,"Hãy nhập tên môn học", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                if (!txtTenMonHoc.getText().toString().isEmpty()) {*/
 
 
     }

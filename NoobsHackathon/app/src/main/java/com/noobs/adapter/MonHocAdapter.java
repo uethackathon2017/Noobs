@@ -1,7 +1,6 @@
 package com.noobs.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -14,11 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.noobs.model.MonHoc;
-import com.noobs.noobshackathon.ChonDapAnActivity;
-import com.noobs.noobshackathon.MainActivity;
+import com.noobs.noobshackathon.SuaMonHocActivity;
 import com.noobs.noobshackathon.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,7 +64,7 @@ public class MonHocAdapter extends ArrayAdapter<MonHoc> {
     }
 
     private void xulyEditMonHoc(int position) {
-        Intent intent=new Intent(context,ChonDapAnActivity.class);
+        Intent intent=new Intent(context,SuaMonHocActivity.class);
         intent.putExtra("MONHOCSENT",objects.get(position));
         context.startActivityForResult(intent,111);
     }

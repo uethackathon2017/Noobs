@@ -36,13 +36,24 @@ public class DapAnAdapter extends ArrayAdapter<DapAn> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
         View row=inflater.inflate(this.resource,null);
         TextView txtTenDapAn= (TextView) row.findViewById(R.id.txtTenDapAn);
         Button btnDelDapAn= (Button) row.findViewById(R.id.btnDelDapAn);
         DapAn da=this.objects.get(position);
         txtTenDapAn.setText(Integer.toString(da.getMaDe()));
+        btnDelDapAn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                xulyDelDapAn(position);
+            }
+        });
         return row;
+    }
+
+    private void xulyDelDapAn(int position) {
+        this.objects.remove(position);
+        this.notifyDataSetChanged();
     }
 }
