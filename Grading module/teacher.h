@@ -37,6 +37,7 @@ public:
 	void setSampleSheet(Mat sampleSheet = Mat()){
 		if (!sampleSheet.data) return;
 		cvtColor(sampleSheet, this->sampleSheet, CV_BGRA2GRAY);
+		// this->sampleSheet = (this->sampleSheet)(Rect(0, 0, (this->sampleSheet).cols, (this->sampleSheet).rows / 3)).clone(); 
 		detector->detect(sampleSheet, keypoints_object);
 		detector->compute(sampleSheet, keypoints_object, descriptor_object);
 	}

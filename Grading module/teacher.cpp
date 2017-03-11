@@ -9,6 +9,29 @@ void teacher::test(){
 void teacher::chamDiem(){
 	Mat answerSheet = getAnswerSheet();
 	//TODO: add code cham diem vao day
+
+    // GaussianBlur( answerSheet, answerSheet, Size(9, 9), 2, 2 );
+
+    vector<Vec3f> circles;
+
+  /// Apply the Hough Transform to find the circles
+    HoughCircles( answerSheet, circles, CV_HOUGH_GRADIENT, 1, answerSheet.rows/8, 200, 100, 0, 0 );
+    cvtColor(answerSheet, answerSheet, CV_GRAY2BGR);
+
+  /// Draw the circles detected
+    for( size_t i = 0; i < circles.size(); i++ )
+    {
+        Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
+        int radius = cvRound(circles[i][2]);
+        // circle center
+        circle( answerSheet, center, 3, Scalar(0,255,0), -1, 8, 0 );
+        // circle outline
+        circle( answerSheet, center, radius, Scalar(0,0,255), 3, 8, 0 );
+    }
+
+    namedWindow( "Hough Circle Transform Demo", CV_WINDOW_AUTOSIZE );
+    imshow( "Hough Circle Transform Demo", answerSheet );
+    waitKey();
 }
 
 Mat teacher::getAnswerSheet(){
@@ -53,6 +76,8 @@ Mat teacher::getAnswerSheet(){
         scene.push_back(keypoints_scene[good_matches[i].trainIdx].pt);
     }
 
+    cout << matches.size() << endl;
+
     Mat H = findHomography(obj, scene, RANSAC);
 
     //-- Get the corners from the image_1 ( the object to be "detected" )
@@ -70,16 +95,16 @@ Mat teacher::getAnswerSheet(){
     	line(img_matches, scene_corners[i] + Point2f(sampleSheet.cols, 0), scene_corners[(i + 1) % 4] + Point2f(sampleSheet.cols, 0), Scalar(0, 255, 0), 40);
 
     //-- Show detected matches
-    resize(img_matches, img_matches, Size(800, 800));
-    imshow("Good Matches & Object detection", img_matches);
+    //resize(img_matches, img_matches, Size(800, 800));
+    //imshow("Good Matches & Object detection", img_matches);
 
     //-- Show result
     Mat h = findHomography(scene, obj, RANSAC);
     Mat answerSheet;
-    warpPerspective(answerImage, answerSheet, h, Size(sampleSheet.cols, sampleSheet.rows * 2.5));
-    resize(answerSheet, answerSheet, answerSheet.size() / 3);
+    warpPerspective(answerImage, answerSheet, h, Size(sampleSheet.cols, sampleSheet.rows * 3));
+    resize(answerSheet, answerSheet, answerSheet.size() / 4);
     imshow("Transform", answerSheet);
 
-    waitKey(0);
+    // waitKey(0);
     return answerSheet;
 }
