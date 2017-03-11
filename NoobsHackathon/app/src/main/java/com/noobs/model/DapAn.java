@@ -11,6 +11,8 @@ public class DapAn implements Serializable{
     private String cauTraLoi;
 
     public DapAn() {
+        maDe = 0;
+        cauTraLoi = new String();
     }
 
     public int getMaDe() {

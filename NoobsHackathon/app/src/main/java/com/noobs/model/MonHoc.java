@@ -12,6 +12,8 @@ public class MonHoc implements Serializable{
     private ArrayList<DapAn> dsDapAn;
 
     public MonHoc() {
+        tenMonHoc = new String();
+        dsDapAn = new ArrayList<DapAn>();
     }
 
     public String getTenMonHoc() {
