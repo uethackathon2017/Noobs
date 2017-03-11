@@ -44,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void xuLyAddMonHoc() {
-        Intent intent=new Intent(MainActivity.this,SuaMonHocActivity.class);
+        Intent intent=new Intent(MainActivity.this,CameraActivity.class);
         intent.putExtra("MONHOCSENT",new MonHoc());
         startActivityForResult(intent,111);
+
        /* final AlertDialog dialog;
         AlertDialog.Builder mBuilder=new AlertDialog.Builder(MainActivity.this);
         View mView= getLayoutInflater().inflate(R.layout.dialog_nhapten,null);

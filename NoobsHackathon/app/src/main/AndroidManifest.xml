@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.noobs.noobshackathon">
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -17,7 +18,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".SuaMonHocActivity" />
-        <activity android:name=".SuaDapAnActivity"></activity>
+        <activity android:name=".SuaDapAnActivity" />
+        <activity android:name=".CameraActivity"
+android:screenOrientation="portrait"
+android:theme="@style/Landscape_camera"
+            ></activity>
     </application>
 
 </manifest>
